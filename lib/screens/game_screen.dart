@@ -95,11 +95,13 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _boardCells = List<Color?>.filled(gridSize * gridSize, null);
-    _cellFadeValues = Map.fromIterable(
-      List.generate(gridSize * gridSize, (i) => i),
-      valueFactory: (_) => 1.0,
-    );
+        _boardCells = List<Color?>.filled(gridSize * gridSize, null);
+            _cellFadeValues = {
+      for (var i = 0; i < gridSize * gridSize; i++) i: 1.0
+    };
+
+
+
     _generateNextPieces();
     Future.microtask(() {
       final gameState = Provider.of<GameStateProvider>(context, listen: false);
